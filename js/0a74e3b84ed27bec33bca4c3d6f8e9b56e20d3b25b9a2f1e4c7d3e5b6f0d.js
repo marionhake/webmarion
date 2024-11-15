@@ -29,10 +29,18 @@ if (registerForm) {
     e.preventDefault();
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
+    
+    if (!email || !password) {
+      document.getElementById('error-message').innerText = "Please fill out both fields.";
+      return;
+    }
+
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => window.location.href = "/home")
+      .then(() => {
+        window.location.href = "/home";
+      })
       .catch((error) => {
-        const errorMessage = error.code === 'auth/email-already-in-use' ? "Email already in use" : "Error creating account";
+        const errorMessage = getErrorMessage(error);
         document.getElementById('error-message').innerText = errorMessage;
       });
   });
@@ -44,10 +52,18 @@ if (loginForm) {
     e.preventDefault();
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
+    
+    if (!email || !password) {
+      document.getElementById('error-message').innerText = "Please fill out both fields.";
+      return;
+    }
+
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => window.location.href = "/home")
+      .then(() => {
+        window.location.href = "/home";
+      })
       .catch((error) => {
-        const errorMessage = error.code === 'auth/wrong-password' ? "Incorrect password" : error.code === 'auth/user-not-found' ? "User not found" : "Error logging in";
+        const errorMessage = getErrorMessage(error);
         document.getElementById('error-message').innerText = errorMessage;
       });
   });
@@ -56,6 +72,33 @@ if (loginForm) {
 const logoutButton = document.getElementById('logout-btn');
 if (logoutButton) {
   logoutButton.addEventListener('click', () => {
-    signOut(auth).then(() => window.location.href = "/login");
+    signOut(auth).then(() => {
+      window.location.href = "/login";
+    });
   });
+}
+
+function getErrorMessage(error) {
+  let errorMessage = "An error occurred. Please try again.";
+  switch (error.code) {
+    case 'auth/email-already-in-use':
+      errorMessage = "The email address is already in use by another account.";
+      break;
+    case 'auth/invalid-email':
+      errorMessage = "The email address is not valid.";
+      break;
+    case 'auth/weak-password':
+      errorMessage = "The password is too weak. It must be at least 6 characters.";
+      break;
+    case 'auth/wrong-password':
+      errorMessage = "The password is incorrect.";
+      break;
+    case 'auth/user-not-found':
+      errorMessage = "No user found with this email address.";
+      break;
+    default:
+      errorMessage = "Something went wrong. Please try again later.";
+      break;
+  }
+  return errorMessage;
 }

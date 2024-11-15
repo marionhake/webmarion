@@ -45,7 +45,7 @@ if (loginForm) {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => window.location.href = "home")
+      .then(() => window.location.href = "/home")
       .catch((error) => {
         const errorMessage = error.code === 'auth/wrong-password' ? "Incorrect password" : error.code === 'auth/user-not-found' ? "User not found" : "Error logging in";
         document.getElementById('error-message').innerText = errorMessage;

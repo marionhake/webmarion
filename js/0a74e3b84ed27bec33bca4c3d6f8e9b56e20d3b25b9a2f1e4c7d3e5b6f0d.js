@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC8eA_D3BcJpJU0QSEZdd_ql3KiJi9RFnk",
@@ -24,59 +24,57 @@ onAuthStateChanged(auth, (user) => {
 });
 
 const registerForm = document.getElementById('register-form');
-const errorMessageDiv = document.getElementById('error-message');
-
-registerForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const email = document.getElementById('register-email').value;
-  const password = document.getElementById('register-password').value;
-
-  if (!email || !password) {
-    errorMessageDiv.innerText = "Please fill out both fields.";
-    return;
-  }
-
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-    // Send email verification
-    await sendEmailVerification(userCredential.user);
-    alert('Registration successful! A verification email has been sent to your email address.');
+if (registerForm) {
+  registerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
     
-    // Redirect to login after registration
-    window.location.href = "/login";
-  } catch (error) {
-    const errorMessage = getErrorMessage(error);
-    errorMessageDiv.innerText = errorMessage;
-  }
-});
+    if (!email || !password) {
+      document.getElementById('error-message').innerText = "Please fill out both fields.";
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        window.location.href = "/home";
+      })
+      .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        document.getElementById('error-message').innerText = errorMessage;
+      });
+  });
+}
 
 const loginForm = document.getElementById('login-form');
-const loginErrorMessageDiv = document.getElementById('login-error-message');
-
-loginForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const email = document.getElementById('login-email').value;
-  const password = document.getElementById('login-password').value;
-
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    if (userCredential.user.emailVerified) {
-      window.location.href = "/home"; // Proceed to home if email is verified
-    } else {
-      alert('Please verify your email before logging in.');
-      signOut(auth); // Log out if email is not verified
+if (loginForm) {
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    
+    if (!email || !password) {
+      document.getElementById('error-message').innerText = "Please fill out both fields.";
+      return;
     }
-  } catch (error) {
-    const errorMessage = error.code === 'auth/wrong-password' ? "Incorrect password" : error.code === 'auth/user-not-found' ? "User not found" : "Error logging in";
-    loginErrorMessageDiv.innerText = errorMessage;
-  }
-});
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        window.location.href = "/home";
+      })
+      .catch((error) => {
+        const errorMessage = getErrorMessage(error);
+        document.getElementById('error-message').innerText = errorMessage;
+      });
+  });
+}
 
 const logoutButton = document.getElementById('logout-btn');
 if (logoutButton) {
   logoutButton.addEventListener('click', () => {
-    signOut(auth).then(() => window.location.href = "/login");
+    signOut(auth).then(() => {
+      window.location.href = "/login";
+    });
   });
 }
 
@@ -91,6 +89,12 @@ function getErrorMessage(error) {
       break;
     case 'auth/weak-password':
       errorMessage = "The password is too weak. It must be at least 6 characters.";
+      break;
+    case 'auth/wrong-password':
+      errorMessage = "The password is incorrect.";
+      break;
+    case 'auth/user-not-found':
+      errorMessage = "No user found with this email address.";
       break;
     default:
       errorMessage = "Something went wrong. Please try again later.";

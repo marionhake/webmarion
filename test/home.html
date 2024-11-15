@@ -9,5 +9,13 @@
 <body>
   <h1>Welcome to the Home Page!</h1>
   <p>You are logged in successfully.</p>
+  <button id="logout-btn">Logout</button>
+  <script type="module">
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+    const auth = getAuth();
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      signOut(auth).then(() => window.location.href = "login.html");
+    });
+  </script>
 </body>
 </html>

@@ -36,12 +36,12 @@ registerForm.addEventListener('submit', async (e) => {
   }
 
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    await sendEmailVerification(user);
+    await createUserWithEmailAndPassword(auth, email, password);
 
     verificationCode = generateVerificationCode();
     const expirationTime = new Date().getTime() + 5 * 60 * 1000;
+
+    const user = auth.currentUser;
 
     await setDoc(doc(db, "verificationCodes", user.uid), {
       code: verificationCode,
@@ -127,13 +127,16 @@ function getErrorMessage(error) {
   let errorMessage = "An error occurred. Please try again.";
   switch (error.code) {
     case 'auth/email-already-in-use':
-      errorMessage = "The email address is already in use.";
+      errorMessage = "The email address is already in use by another account.";
       break;
     case 'auth/invalid-email':
       errorMessage = "The email address is not valid.";
       break;
     case 'auth/weak-password':
-      errorMessage = "Password must be at least 6 characters.";
+      errorMessage = "The password is too weak. It must be at least 6 characters.";
+      break;
+    default:
+      errorMessage = "Something went wrong. Please try again later.";
       break;
   }
   return errorMessage;

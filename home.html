@@ -7,14 +7,16 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Welcome to the Home Page!</h1>
-  <p>You are logged in successfully.</p>
-  <button id="logout-btn">Logout</button>
+  <div class="home-container">
+    <h1>Home Page Coming Soon!</h1>
+    <p>We are working on something great. Stay tuned!</p>
+    <button id="logout-btn" class="logout-btn">Logout</button>
+  </div>
   <script type="module">
     import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
     const auth = getAuth();
     document.getElementById('logout-btn').addEventListener('click', () => {
-      signOut(auth).then(() => window.location.href = "login");
+      signOut(auth).then(() => window.location.href = "/login");
     });
   </script>
 </body>

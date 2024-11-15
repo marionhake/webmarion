@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC8eA_D3BcJpJU0QSEZdd_ql3KiJi9RFnk",
@@ -14,16 +13,18 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-let verificationCode;
+onAuthStateChanged(auth, (user) => {
+  if (user && (window.location.pathname === "/login" || window.location.pathname === "/register")) {
+    window.location.href = "/home";
+  }
+  if (!user && window.location.pathname === "/home") {
+    window.location.href = "/login";
+  }
+});
 
 const registerForm = document.getElementById('register-form');
-const verificationSection = document.getElementById('verification-section');
-const verifyBtn = document.getElementById('verify-btn');
-const verificationCodeInput = document.getElementById('verification-code');
 const errorMessageDiv = document.getElementById('error-message');
-const verificationErrorMessageDiv = document.getElementById('verification-error-message');
 
 registerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -36,90 +37,46 @@ registerForm.addEventListener('submit', async (e) => {
   }
 
   try {
-    await createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-    verificationCode = generateVerificationCode();
-    const expirationTime = new Date().getTime() + 5 * 60 * 1000;
-
-    const user = auth.currentUser;
-
-    await setDoc(doc(db, "verificationCodes", user.uid), {
-      code: verificationCode,
-      expirationTime: expirationTime
-    });
-
-    sendCodeEmail(email, verificationCode);
-    verificationSection.style.display = 'block';
-    registerForm.style.display = 'none';
+    // Send email verification
+    await sendEmailVerification(userCredential.user);
+    alert('Registration successful! A verification email has been sent to your email address.');
+    
+    // Redirect to login after registration
+    window.location.href = "/login";
   } catch (error) {
     const errorMessage = getErrorMessage(error);
     errorMessageDiv.innerText = errorMessage;
   }
 });
 
-verifyBtn.addEventListener('click', async () => {
-  const enteredCode = verificationCodeInput.value;
+const loginForm = document.getElementById('login-form');
+const loginErrorMessageDiv = document.getElementById('login-error-message');
 
-  if (!enteredCode) {
-    verificationErrorMessageDiv.innerText = "Please enter the verification code.";
-    return;
-  }
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
 
-  const user = auth.currentUser;
-
-  if (!user) {
-    verificationErrorMessageDiv.innerText = "No user is currently logged in.";
-    return;
-  }
-
-  const docRef = doc(db, "verificationCodes", user.uid);
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    const verificationData = docSnap.data();
-    const currentTime = new Date().getTime();
-
-    if (currentTime > verificationData.expirationTime) {
-      verificationErrorMessageDiv.innerText = "The verification code has expired.";
-      return;
-    }
-
-    if (enteredCode === verificationData.code) {
-      verificationErrorMessageDiv.innerText = "Email verified successfully!";
-      window.location.href = "/home";
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    if (userCredential.user.emailVerified) {
+      window.location.href = "/home"; // Proceed to home if email is verified
     } else {
-      verificationErrorMessageDiv.innerText = "Incorrect verification code.";
+      alert('Please verify your email before logging in.');
+      signOut(auth); // Log out if email is not verified
     }
-  } else {
-    verificationErrorMessageDiv.innerText = "Verification code not found.";
+  } catch (error) {
+    const errorMessage = error.code === 'auth/wrong-password' ? "Incorrect password" : error.code === 'auth/user-not-found' ? "User not found" : "Error logging in";
+    loginErrorMessageDiv.innerText = errorMessage;
   }
 });
 
-function generateVerificationCode() {
-  const code = Math.floor(100000 + Math.random() * 900000);
-  return code;
-}
-
-function sendCodeEmail(email, code) {
-  const emailBody = `
-    <h3>Your verification code</h3>
-    <p>Please enter the following code to verify your email address:</p>
-    <h2>${code}</h2>
-    <p>The code will expire in 5 minutes.</p>
-  `;
-
-  const emailSubject = "Email Verification Code";
-
-  fetch('/send-email', { 
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email: email,
-      subject: emailSubject,
-      body: emailBody,
-    })
+const logoutButton = document.getElementById('logout-btn');
+if (logoutButton) {
+  logoutButton.addEventListener('click', () => {
+    signOut(auth).then(() => window.location.href = "/login");
   });
 }
 

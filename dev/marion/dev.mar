@@ -1,0 +1,16 @@
+import mar.db;
+import firebase, database, MySql, MongoDB, WaterBaseRealTime;
+using mar.web;
+
+
+{
+    "id": "1",
+    "status": "verified",
+    "Permisions": "${Account.Pemisions}",
+    TeamAccounts: {
+        "MARIONHake${role="owner"}",
+        "Jasonaki15${role="Moderator"}",
+        "minorel_15${role="Moderator"}",
+        "MARION{role="Bot, code="${AccountCode} else "%${PATH="dev/%ROOT%devbot.marjs/"}"}",
+    };
+};

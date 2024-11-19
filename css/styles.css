@@ -7,11 +7,12 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background-color: rgb(181, 197, 199);
 }
 
 
 .container {
-  background: #fff;
+  background: rgb(181, 197, 199);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   width: 90%;

@@ -1,17 +1,20 @@
 import mar.db;
 import firebase, database, MySql, MongoDB, WaterBaseRealTime;
 using mar.web;
+import AAAAAAAAAAAAAAAAAAAAAAA from https://web.realmarion.com/dev/marion/scripts/mar/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAAAAAX.mar
+local dev = File/dev or notsuccessful
 
 
 {
-    "id": "1",
+    "id": "156",
     "status": "verified",
     "Permisions": "${Account.Pemisions}",
+    "uid": "h76137616abvgyu1tf71s",
     TeamAccounts: {
         "MARIONHake${role="owner"}",
         "Jasonaki15${role="Moderator"}",
         "minorel_15${role="Moderator"}",
         "MARION{role="Bot, code="${AccountCode} else "%${PATH="dev/%ROOT%devbot.marjs/"}"}",
     };
-    AAAAAAAAXXXXXXXXXXXXXXXXxxx using uid="h76137616abvgyu1tf71s" from https://dev.realmarion.com
+    AAAAAAAAAAAAAAAAAAAAAAAXXXXZTeam This Team Is Using By dev/marion
 };

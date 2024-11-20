@@ -106,7 +106,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// Logout User
 logoutBtn.addEventListener('click', () => {
   signOut(auth).then(() => {
     window.location.href = "/login";

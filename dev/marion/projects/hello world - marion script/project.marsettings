@@ -1,0 +1,9 @@
+import settings from dev
+project-settings = {
+    "developeruid": "$settings.developer:AutoCheckAndSet()"
+    "name": "Hello World For Starters In Marion Scripts"
+    "Version": "3.4.7"
+    "type": "Develoment"
+    "status": "public"
+    "files": "%Project_Root%/Files/.NotHiddenFiles"
+}

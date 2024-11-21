@@ -1,0 +1,9 @@
+import settings from dev
+project-settings = {
+    "developeruid": "$settings.developer:AutoCheckAndSet()"
+    "name": "DLC"
+    "Version": "15.34.59.29.13"
+    "type": "Develoment"
+    "status": "private"
+    "files": "%Project_Root%/Files/.NotHiddenFiles"
+}

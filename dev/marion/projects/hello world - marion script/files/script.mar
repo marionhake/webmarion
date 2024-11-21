@@ -8,3 +8,10 @@ local Application = File.New("Application", Name="Hello World App")
 local MainForm = Instance.New("Form", Name="Main", Parent="Application")
 
 MainForm.AddForm(name="HelloWorldLabel" txt="Hello Wolrd!" size=full-form txt-size=98 id="HelloWorld")
+// you can do this to .exe file in power shell you need first to install marion-cmds for power shell and after just type in power shell administrator mar conver exe your file path e.g C:/Project/Hello World/File.mar (your file name) .exe file will created in file path
+
+
+// web hello world
+local web = File/Your Html FIle.html
+local MainHelloWorldLabel = web:FindFirstChildWithId(HelloWorld)
+MainHelloWorldLabel:SetSettings(txt="Hello World!" size="23" path="ceneter")

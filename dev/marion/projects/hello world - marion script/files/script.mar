@@ -1,0 +1,10 @@
+// app hello World
+import system
+import os
+import winexe
+
+
+local Application = File.New("Application", Name="Hello World App")
+local MainForm = Instance.New("Form", Name="Main", Parent="Application")
+
+MainForm.AddForm(name="HelloWorldLabel" txt="Hello Wolrd!" size=full-form txt-size=98 id="HelloWorld")

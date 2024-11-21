@@ -1,1 +1,5 @@
 Support %START%
+NotSupport http in web
+acc = File/database/data.db and File/database/data.MARDB
+Support http in scripts if http.use..notinweb.status (not verified) = true then{NotSupport http[wait(10)scanos if mar.IsVerified if IsVerified == true then{Support http} end if IsVerified = false then{NotSupport.wait..seconds===10.IsVerified:Loop(inf)}]}
+if NotSupport.http ~ mar.IsCheckingInWeb (true) then{acc:GetWarning(reason=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxxxxxxxxxxxccccccccccccccccccccccccccccccccccccccccccccccccccAMkal, 109)} if mar.IsCheckingInWeb.GetWarning.reason..AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxxxxxxxxxxxccccccccccccccccccccccccccccccccccccccccccccccccccAMkal:DoThis(5) then{msg.txt="LAST WARNING"} if mar.IsCheckingInWeb.GetWarning.reason..AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxxxxxxxxxxxccccccccccccccccccccccccccccccccccccccccccccccccccAMkal:DoThis(6) then{acc:GetBan("We Warning You! you have been ban for 1day!", time=86400)}

@@ -1,7 +1,11 @@
 PATH=FILE/DEV/MARION/SCRIPTS/MAR/WATERxxxxxxxxxxxxxBASEAAAAAAAA.MAR
 LOAD FILE/DEV/MARION
 IMPORT MAR FROM MT
-
+IMPORT GRANT FROM MT
+IMPORT Grantaccess from "https://web.realmarion.com/dev/marion/scripts/js/AAAAAAAAAAAAAAAAAAAAAAAAASSSSSSSSXxxxxxxABC_d.js"
 
 MAR LOADFILE FILE/DataBase/data.db, 8, href="GetWater", 7, 7, -s, t-, MakeDb
 if MAR.LOADFILE.dbAAAAAAAAAAAAAAAAAAAAAAAAAAAAx643521AAAAB_DB.Type (ERR) = true then{data:destroy(print("successful reload project") html.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXXxAAAAAAAAAAAAAAAAAAAAAAAAAADbAAAAAAAAAAAAAAAAAAAAAErr:GetId("err-create".errmsg.text = "error creating project!"))}
+GRANT WebService
+GRANT Web.Access
+GRANT Access "https://web.realmarion.com/dev/marion"

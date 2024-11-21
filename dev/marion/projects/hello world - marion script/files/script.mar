@@ -15,5 +15,3 @@ MainForm.AddForm(name="HelloWorldLabel" txt="Hello Wolrd!" size=full-form txt-si
 local web = File/Your Html FIle.html
 local MainHelloWorldLabel = web:FindFirstChildWithId(HelloWorld)
 MainHelloWorldLabel:SetSettings(txt="Hello World!" size="23" path="ceneter")
-
-

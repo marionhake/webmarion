@@ -1,5 +1,15 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateEmail, updatePhoneNumber, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut, 
+  updateEmail, 
+  updatePhoneNumber, 
+  onAuthStateChanged, 
+  sendPasswordResetEmail, 
+  updatePassword 
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC8eA_D3BcJpJU0QSEZdd_ql3KiJi9RFnk",
@@ -40,8 +50,7 @@ if (registerForm) {
         window.location.href = "/home";
       })
       .catch((error) => {
-        const errorMessage = getErrorMessage(error);
-        document.getElementById("error-message").innerText = errorMessage;
+        document.getElementById("error-message").innerText = getErrorMessage(error);
       });
   });
 }
@@ -63,8 +72,7 @@ if (loginForm) {
         window.location.href = "/home";
       })
       .catch((error) => {
-        const errorMessage = getErrorMessage(error);
-        document.getElementById("error-message").innerText = errorMessage;
+        document.getElementById("error-message").innerText = getErrorMessage(error);
       });
   });
 }
@@ -75,6 +83,28 @@ if (logoutButton) {
     signOut(auth).then(() => {
       window.location.href = "/login";
     });
+  });
+}
+
+const forgotPasswordForm = document.getElementById("forgot-password-form");
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("forgot-password-email").value;
+
+    if (!email) {
+      document.getElementById("forgot-error-message").innerText = "Please enter your email.";
+      return;
+    }
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        document.getElementById("forgot-error-message").innerText = "Password reset email sent.";
+        document.getElementById("forgot-error-message").style.color = "green";
+      })
+      .catch((error) => {
+        document.getElementById("forgot-error-message").innerText = getErrorMessage(error);
+      });
   });
 }
 

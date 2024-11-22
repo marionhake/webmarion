@@ -6,12 +6,12 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f7fc;
+  background-color: #f9f9f9;
   color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .container {
@@ -19,42 +19,42 @@ body {
   max-width: 400px;
   padding: 20px;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 h1 {
-  font-size: 28px;
-  color: #4A90E2;
-  margin-bottom: 30px;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #4a90e2;
 }
 
 input {
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
+  margin-bottom: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s;
 }
 
 input:focus {
-  border-color: #4A90E2;
+  border-color: #4a90e2;
   outline: none;
 }
 
 button {
   width: 100%;
   padding: 12px;
-  background-color: #4A90E2;
+  background-color: #4a90e2;
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
 }
 
 button:hover {
@@ -62,59 +62,49 @@ button:hover {
 }
 
 a {
-  color: #4A90E2;
   text-decoration: none;
-  transition: color 0.3s ease;
+  color: #4a90e2;
+  transition: color 0.2s;
 }
 
 a:hover {
   color: #357ab7;
 }
 
-.error {
+.error-message {
   color: red;
   font-size: 14px;
   margin-top: 10px;
-  display: none;
+}
+
+.success-message {
+  color: green;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: left;
 }
 
-p {
+label {
   font-size: 14px;
-  margin-top: 20px;
-}
-
-#settings-info {
-  font-size: 18px;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-#settings-form input {
-  margin-bottom: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
 }
 
 @media (max-width: 480px) {
   .container {
-      width: 90%;
       padding: 15px;
   }
 
   h1 {
-      font-size: 24px;
+      font-size: 20px;
   }
 
   input, button {
       font-size: 14px;
       padding: 10px;
-  }
-
-  p {
-      font-size: 12px;
   }
 }

@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Settings</title>
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Settings</h1>
-    <form id="add-email-form">
-      <input type="email" id="new-email" placeholder="New Email">
-      <button type="submit">Update Email</button>
-      <p id="success-message"></p>
-      <p id="error-message"></p>
-    </form>
-  </div>
-  <div id="add-phone-section">
-    <h2>Add New Phone Number</h2>
-    <input type="tel" id="new-phone" placeholder="Enter new phone number">
-    <button id="add-phone-btn">Add Phone</button>
-    <p id="phone-error-message" class="error-message"></p>
-    <p id="phone-success-message" class="success-message"></p>
-  </div>
-  
-  <script type="module" src="js/0a74e3b84ed27bec33bca4c3d6f8e9b56e20d3b25b9a2f1e4c7d3e5b6f0d.js"></script>
+    <div class="container">
+        <h1>Account Settings</h1>
+        <form id="settings-form">
+            <div id="settings-info"></div>
+            <input type="text" id="new-phone" placeholder="New Phone Number">
+            <input type="email" id="new-email" placeholder="New Email Address">
+            <button type="submit">Update</button>
+            <div id="error-message" class="error"></div>
+        </form>
+        <button id="logout-btn">Logout</button>
+    </div>
+    <script src="/js/0a74e3b84ed27bec33bca4c3d6f8e9b56e20d3b25b9a2f1e4c7d3e5b6f0d.js"></script>
 </body>
 </html>

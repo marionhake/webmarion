@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - marion</title>
+    <link rel="stylesheet" href="css/donatestyle.css">
+</head>
+<body>
+    <div class="donation-container">
+        <h1>Support Me</h1>
+        <button id="donate-button">Donate</button>
+    </div>
+
+    <div id="donation-popup" class="popup hidden">
+        <div class="popup-content">
+            <h2>Make a Donation</h2>
+            <label for="amount">Donation Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount in USD/EUR" min="1" step="0.01">
+
+            <label for="message">Your Message (optional):</label>
+            <textarea id="message" placeholder="Say something nice..."></textarea>
+
+            <label for="emotes">Choose an Emote:</label>
+            <div id="emotes" class="emote-container">
+                <img src="emotes/smile.png" alt=":smile:" data-emote=":smile:">
+                <img src="emotes/heart.png" alt=":heart:" data-emote=":heart:">
+                <img src="emotes/thumbs-up.png" alt=":thumbs-up:" data-emote=":thumbs-up:">
+                <img src="emotes/marion" alt=":mar:" data-emote=":mar:">
+            </div>
+
+            <button id="pay-button">Pay with PayPal</button>
+            <button id="close-popup">Close</button>
+        </div>
+    </div>
+
+    <script src="js/donation.js"></script>
+</body>
+</html>

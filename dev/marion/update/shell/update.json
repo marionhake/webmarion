@@ -5,6 +5,10 @@
 
     ],
     "update_url": "https://web.realmarion.com/dev/marion/update/shell/marion-shell-setup.exe",
+    "type": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxxxxxxxxxxxxxxxxxxxxxxxAAAAAAAAAZMarxAAAAAAAAAAAAAAAAAAAAAAAAAAAAXXXxxxxx",
+    "typex": "iparis(0x000001)",
+    "typey": "pairs(0x0000001)",
+    "typez": "ipairs(0x0000000 in pairs(0x000001)",
+    "typer": "HKEY_LOCAL_MACHINE/MARION/AAAAAAAAAxMar.QWORD",
     "required": false
-  }
-  
+}

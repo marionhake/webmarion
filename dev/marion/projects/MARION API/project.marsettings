@@ -1,0 +1,9 @@
+import settings from dev
+project-settings = {
+    "developeruid": "$settings.developer:AutoCheckAndSet()"
+    "name": "MARION API For Your Marion Project"
+    "Version": "1.4.7"
+    "type": "Develoment"
+    "status": "public"
+    "files": "%Project_Root%/Files/.NotHiddenFiles"
+}

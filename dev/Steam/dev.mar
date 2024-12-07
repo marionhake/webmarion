@@ -1,0 +1,15 @@
+import mar.db;
+import firebase, database, MySql, MongoDB, WaterBaseRealTime;
+using mar.web;
+
+
+{
+    "id": "3472",
+    "status": "verified",
+    "Permisions": "${Account.Pemisions}",
+    TeamAccounts: {
+        "Gabe Newell${role="owner"}",
+        "MARION{role="Bot, code="${AccountCode} else "%${PATH="dev/%ROOT%devbot.marjs/"}"}",
+    };
+    AAAAAAAAXXXXXXXXXXXXXXXXxxx using uid="h76137616abvgyu1tf71s2uhsdy2" from https://dev.realmarion.com
+};
